@@ -3,7 +3,6 @@ import { useState } from "react";
 import { FiMenu, FiChevronDown, FiSearch } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./themetoggle"; // Import the ThemeToggle component
-import Link from "next/link"; // Import Link for routing
 
 export default function SideNav() {
   const [isOpen, setIsOpen] = useState(false); // Sidenav visibility
@@ -70,7 +69,9 @@ export default function SideNav() {
         </div>
 
         {/* Theme Toggle Button */}
-
+        <div className="mb-6">
+          <ThemeToggle />
+        </div>
 
         {/* Navigation Menu */}
         <ul className="h-[calc(100%-8rem)] overflow-auto">
@@ -81,9 +82,9 @@ export default function SideNav() {
                 className="flex items-center justify-between cursor-pointer hover:bg-gray-700 p-3 rounded-md transition duration-200"
                 onClick={() => item.submenu && toggleDropdown(item.title)}
               >
-                <Link href={item.link} className="flex-1 text-lg font-semibold">
+                <a href={item.link} className="flex-1 text-lg font-semibold">
                   {item.title}
-                </Link>
+                </a>
                 {item.submenu && (
                   <FiChevronDown
                     className={`transition-transform ${
@@ -105,7 +106,7 @@ export default function SideNav() {
                   >
                     {item.submenu.map((sub, subIndex) => (
                       <li key={subIndex} className="hover:bg-gray-700 p-2 rounded-md transition duration-200">
-                        <Link href={sub.link} className="text-sm">{sub.title}</Link>
+                        <a href={sub.link} className="text-sm">{sub.title}</a>
                       </li>
                     ))}
                   </motion.ul>
@@ -114,9 +115,6 @@ export default function SideNav() {
             </li>
           ))}
         </ul>
-        <div className="mb-6">
-          <ThemeToggle />
-        </div>
       </aside>
 
       {/* Main Content */}

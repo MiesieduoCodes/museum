@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class", // Enable dark mode with the 'class' strategy
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -8,8 +9,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        background: "var(--background)", // Light mode background
+        foreground: "var(--foreground)", // Light mode text
+        darkBackground: "var(--dark-background)", // Dark mode background
+        darkForeground: "var(--dark-foreground)", // Dark mode text
       },
     },
   },

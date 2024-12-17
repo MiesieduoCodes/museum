@@ -1,7 +1,9 @@
 "use client"; // Ensure this runs on the client side
 import { useState } from "react";
 import { FiMenu, FiChevronDown, FiSearch } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
+import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./themetoggle"; // Import the ThemeToggle component
+import Link from "next/link"; // Import Link for routing
 
 export default function SideNav() {
   const [isOpen, setIsOpen] = useState(false); // Sidenav visibility
@@ -38,7 +40,7 @@ export default function SideNav() {
   );
 
   return (
-    <div className="flex">
+    <div className="flex h-screen bg-gray-900 text-white">
       {/* Toggle Button for Mobile */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -49,36 +51,39 @@ export default function SideNav() {
 
       {/* Side Navigation */}
       <aside
-        className={`fixed top-0 left-0 h-full bg-gray-800 text-white w-64 p-4 transform ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform md:translate-x-0 md:relative`}
+        className={`fixed top-0 left-0 h-full w-64 bg-gray-800 p-6 transition-transform transform 
+          ${isOpen ? "translate-x-0" : "-translate-x-full"} 
+          md:translate-x-0 md:relative md:h-screen`}
       >
         {/* Search Bar */}
-        <div className="mb-4">
+        <div className="mb-6">
           <div className="flex items-center border-b border-gray-500">
             <FiSearch className="text-gray-400 mr-2" />
             <input
               type="text"
               placeholder="Search..."
-              className="bg-transparent w-full p-2 outline-none"
+              className="bg-transparent w-full p-2 outline-none text-white"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
 
+        {/* Theme Toggle Button */}
+
+
         {/* Navigation Menu */}
-        <ul>
+        <ul className="h-[calc(100%-8rem)] overflow-auto">
           {filteredItems.map((item, index) => (
-            <li key={index} className="mb-2">
+            <li key={index} className="mb-4">
               {/* Main Menu Item */}
               <div
-                className="flex items-center justify-between cursor-pointer hover:bg-gray-700 p-2 rounded"
+                className="flex items-center justify-between cursor-pointer hover:bg-gray-700 p-3 rounded-md transition duration-200"
                 onClick={() => item.submenu && toggleDropdown(item.title)}
               >
-                <a href={item.link} className="flex-1">
+                <Link href={item.link} className="flex-1 text-lg font-semibold">
                   {item.title}
-                </a>
+                </Link>
                 {item.submenu && (
                   <FiChevronDown
                     className={`transition-transform ${
@@ -99,11 +104,8 @@ export default function SideNav() {
                     className="ml-4 overflow-hidden"
                   >
                     {item.submenu.map((sub, subIndex) => (
-                      <li
-                        key={subIndex}
-                        className="hover:bg-gray-700 p-2 rounded"
-                      >
-                        <a href={sub.link}>{sub.title}</a>
+                      <li key={subIndex} className="hover:bg-gray-700 p-2 rounded-md transition duration-200">
+                        <Link href={sub.link} className="text-sm">{sub.title}</Link>
                       </li>
                     ))}
                   </motion.ul>
@@ -112,12 +114,15 @@ export default function SideNav() {
             </li>
           ))}
         </ul>
+        <div className="mb-6">
+          <ThemeToggle />
+        </div>
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 p-4">
-        <h1 className="text-3xl font-bold">Welcome to the Art Museum</h1>
-        <p>Explore the art gallery using the sidebar!</p>
+      <div className="flex-1 p-6 overflow-auto">
+        <h1 className="text-4xl font-bold">Welcome to the Art Museum</h1>
+        <p className="mt-4 text-lg">Explore the art gallery using the sidebar!</p>
       </div>
     </div>
   );

@@ -2,20 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* globals.css or tailwind.css */
+
+/* Light mode variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #b99595; /* Light mode background */
+  --foreground: #2c2323; /* Light mode text */
+  --dark-background: #161313; /* Dark mode background */
+  --dark-foreground: #af9696; /* Dark mode text */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Dark mode variables */
+html.dark {
+  --background: #1a1414; /* Dark mode background */
+  --foreground: #ffffff; /* Dark mode text */
+  --dark-background: #000000; /* Dark mode background */
+  --dark-foreground: #121212; /* Dark mode text */
 }
 
+/* Tailwind's default styles */
 body {
+  background-color: var(--background);
+  transition: background-color 0.6s ease, color 0.3s ease;
   color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
+/* Add smooth transitions for background and text color */
+
+body.dark {
+  background-color: var(--dark-background);
+  transition: background-color 0.6s ease, color 0.3s ease;
+  color: var(--dark-foreground);
+}
+

@@ -1,22 +1,38 @@
+import HeroSection from "./components/herosection";
 import SideNav from "./components/sidenav";
+import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
 export default function Home() {
   return (
-    <div className="flex">
-      {/* Side Navigation */}
-      <SideNav />
+    <main className="bg-gray-100 min-h-screen">
+      <SideNav/>
+      {/* Hero Section */}
+      <HeroSection />
 
-      {/* Main Content */}
-      <section className="flex-1 py-24">
-        <div className="container mx-auto px-4">
-          <h1 className="text-3xl bg-green-600 font-bold">
-            Next JS Project
-          </h1>
-          <p className="mt-4 text-lg">
-            Welcome to the Next.js project with a responsive sidebar.
-          </p>
-        </div>
+      {/* Content Section */}
+      <section className="py-16 px-6 text-center">
+        <h2 className="text-4xl font-serif font-bold mb-4 text-gray-800">
+          Welcome to the Heart of Art
+        </h2>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+          Discover a curated collection of masterpieces that span centuries of
+          creativity and expression. From classical works to contemporary art,
+          immerse yourself in a journey through human imagination.
+        </p>
       </section>
-    </div>
+
+      {/* Social Icons */}
+      <footer className="flex justify-center space-x-6 py-8 bg-gray-900 text-white">
+        <a href="#" className="hover:text-gray-400">
+          <FaInstagram size={28} />
+        </a>
+        <a href="#" className="hover:text-gray-400">
+          <FaFacebook size={28} />
+        </a>
+        <a href="#" className="hover:text-gray-400">
+          <FaTwitter size={28} />
+        </a>
+      </footer>
+    </main>
   );
 }

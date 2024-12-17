@@ -1,8 +1,11 @@
 "use client"; // Ensure this runs on the client side
 import { useState } from "react";
-import { FiMenu, FiChevronDown, FiSearch } from "react-icons/fi";
+import { FiMenu, FiChevronDown, FiSearch, FiHome, FiInfo, FiMail } from "react-icons/fi"; // Import relevant icons
 import { motion, AnimatePresence } from "framer-motion";
-import ThemeToggle from "./themetoggle"; // Import the ThemeToggle component
+import ThemeToggle from "./themetoggle";
+import { FaPaintBrush } from "react-icons/fa";
+import { MdMonochromePhotos } from "react-icons/md"; 
+import { GiMuscularTorso } from "react-icons/gi"; // Import the ThemeToggle component
 
 export default function SideNav() {
   const [isOpen, setIsOpen] = useState(false); // Sidenav visibility
@@ -14,24 +17,19 @@ export default function SideNav() {
   };
 
   const menuItems = [
-    { title: "Home", link: "/" },
+    { title: "Home", link: "/", icon: <FiHome /> },
     {
       title: "Art Categories",
       submenu: [
-        { title: "Paintings", link: "/categories/paintings" },
-        { title: "Sculptures", link: "/categories/sculptures" },
-        { title: "Photography", link: "/categories/photography" },
+        { title: "Nigerian Art", link: "/categories/paintings", icon: <FaPaintBrush /> },
+        { title: "Niger Delta Art", link: "/categories/sculptures", icon: <GiMuscularTorso /> },
+        { title: "Digital Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
+        { title: "Contemporary Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
+        { title: "West African Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
       ],
     },
-    {
-      title: "Library",
-      submenu: [
-        { title: "Books", link: "/library/books" },
-        { title: "Magazines", link: "/library/magazines" },
-      ],
-    },
-    { title: "About Us", link: "/about" },
-    { title: "Contact", link: "/contact" },
+    { title: "About Us", link: "/about", icon: <FiInfo /> },
+    { title: "Contact", link: "/contact", icon: <FiMail /> },
   ];
 
   const filteredItems = menuItems.filter((item) =>
@@ -82,8 +80,9 @@ export default function SideNav() {
                 className="flex items-center justify-between cursor-pointer hover:bg-gray-700 p-3 rounded-md transition duration-200"
                 onClick={() => item.submenu && toggleDropdown(item.title)}
               >
-                <a href={item.link} className="flex-1 text-lg font-semibold">
-                  {item.title}
+                <a href={item.link} className="flex items-center space-x-3 text-lg font-semibold">
+                  {item.icon}
+                  <span>{item.title}</span>
                 </a>
                 {item.submenu && (
                   <FiChevronDown
@@ -106,7 +105,10 @@ export default function SideNav() {
                   >
                     {item.submenu.map((sub, subIndex) => (
                       <li key={subIndex} className="hover:bg-gray-700 p-2 rounded-md transition duration-200">
-                        <a href={sub.link} className="text-sm">{sub.title}</a>
+                        <a href={sub.link} className="flex items-center space-x-3 text-sm">
+                          {sub.icon}
+                          <span>{sub.title}</span>
+                        </a>
                       </li>
                     ))}
                   </motion.ul>
@@ -116,12 +118,6 @@ export default function SideNav() {
           ))}
         </ul>
       </aside>
-
-      {/* Main Content */}
-      <div className="flex-1 p-6 overflow-auto">
-        <h1 className="text-4xl font-bold">Welcome to the Art Museum</h1>
-        <p className="mt-4 text-lg">Explore the art gallery using the sidebar!</p>
-      </div>
     </div>
   );
 }

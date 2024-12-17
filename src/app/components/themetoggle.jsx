@@ -35,11 +35,11 @@ export default function ThemeToggle() {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50">
+    <div className="absolute top-4 right-4 z-50">
       <motion.button
         onClick={toggleTheme}
         whileTap={{ scale: 0.9 }}
-        className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg"
+        className="p-3 rounded-full bg-gray-200 dark:bg-gray-700 shadow-lg transition-transform transform hover:scale-105"
       >
         <AnimatePresence mode="wait">
           {theme === "light" ? (

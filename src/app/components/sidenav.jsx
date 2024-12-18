@@ -1,16 +1,16 @@
 "use client"; // Ensure this runs on the client side
 import { useState } from "react";
-import { FiMenu, FiChevronDown, FiSearch, FiHome, FiInfo, FiMail } from "react-icons/fi"; // Import relevant icons
+import { FiMenu, FiChevronDown, FiSearch, FiHome, FiInfo, FiMail } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import ThemeToggle from "./themetoggle";
 import { FaPaintBrush } from "react-icons/fa";
-import { MdMonochromePhotos } from "react-icons/md"; 
-import { GiMuscularTorso } from "react-icons/gi"; // Import the ThemeToggle component
+import { MdMonochromePhotos } from "react-icons/md";
+import { GiMuscularTorso } from "react-icons/gi";
 
 export default function SideNav() {
-  const [isOpen, setIsOpen] = useState(false); // Sidenav visibility
-  const [dropdownOpen, setDropdownOpen] = useState({}); // Dropdown toggles
-  const [searchTerm, setSearchTerm] = useState(""); // Search term state
+  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleDropdown = (menu) => {
     setDropdownOpen((prev) => ({ ...prev, [menu]: !prev[menu] }));
@@ -24,8 +24,8 @@ export default function SideNav() {
         { title: "Nigerian Art", link: "/categories/paintings", icon: <FaPaintBrush /> },
         { title: "Niger Delta Art", link: "/categories/sculptures", icon: <GiMuscularTorso /> },
         { title: "Digital Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
-        { title: "Contemporary Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
-        { title: "West African", link: "/categories/photography", icon: <MdMonochromePhotos /> },
+        { title: "Contemporary Art", link: "/categories/contemporary", icon: <MdMonochromePhotos /> },
+        { title: "West African", link: "/categories/west-african", icon: <MdMonochromePhotos /> },
       ],
     },
     { title: "About Us", link: "/about", icon: <FiInfo /> },
@@ -46,7 +46,7 @@ export default function SideNav() {
         <FiMenu />
       </button>
 
-      {/* Side Navigation */}
+      {/* Sidebar */}
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-gray-800 p-6 transition-transform transform 
           ${isOpen ? "translate-x-0" : "-translate-x-full"} 
@@ -54,28 +54,35 @@ export default function SideNav() {
       >
         {/* Search Bar */}
         <div className="mb-6">
-          <div className="flex items-center border-b border-gray-500">
+          <motion.div
+            className="flex items-center border-b border-gray-600"
+            initial={{ opacity: 0, scale: 0.95 }} // Initial state
+            animate={{ opacity: 1, scale: 1 }} // Animation on mount
+            transition={{ duration: 0.3 }} // Transition settings
+          >
             <FiSearch className="text-gray-400 mr-2" />
-            <input
+            <motion.input
               type="text"
               placeholder="Search..."
-              className="bg-transparent w-full p-2 outline-none text-white"
+              className="bg-gray-800 w-full p-2 rounded-md outline-none text-white placeholder-gray-500 transition duration-200 focus:ring-2 focus:ring-blue-500 focus:bg-gray-700"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              initial={{ opacity: 0 }} // Initial opacity for input
+              animate={{ opacity: 1 }} // Fade in animation
+              transition={{ duration: 0.3, delay: 0.1 }} // Delay for input
             />
-          </div>
+          </motion.div>
         </div>
 
-        {/* Theme Toggle Button */}
+        {/* Theme Toggle */}
         <div className="mb-6">
           <ThemeToggle />
         </div>
 
-        {/* Navigation Menu */}
+        {/* Menu */}
         <ul className="h-[calc(100%-8rem)] overflow-auto">
           {filteredItems.map((item, index) => (
             <li key={index} className="mb-4">
-              {/* Main Menu Item */}
               <div
                 className="flex items-center justify-between cursor-pointer hover:bg-gray-700 p-3 rounded-md transition duration-200"
                 onClick={() => item.submenu && toggleDropdown(item.title)}
@@ -86,14 +93,10 @@ export default function SideNav() {
                 </a>
                 {item.submenu && (
                   <FiChevronDown
-                    className={`transition-transform ${
-                      dropdownOpen[item.title] ? "rotate-180" : ""
-                    }`}
+                    className={`transition-transform ${dropdownOpen[item.title] ? "rotate-180" : ""}`}
                   />
                 )}
               </div>
-
-              {/* Submenu with Animation */}
               <AnimatePresence>
                 {item.submenu && dropdownOpen[item.title] && (
                   <motion.ul

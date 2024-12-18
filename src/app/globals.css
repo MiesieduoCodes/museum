@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* globals.css or tailwind.css */
-
 /* Light mode variables */
 :root {
   --background: #b99595; /* Light mode background */
@@ -20,17 +18,15 @@ html.dark {
   --dark-foreground: #121212; /* Dark mode text */
 }
 
-/* Tailwind's default styles */
+/* Apply background and text color based on theme */
 body {
   background-color: var(--background);
-  transition: background-color 0.6s ease, color 0.3s ease;
   color: var(--foreground);
-}
-/* Add smooth transitions for background and text color */
-
-body.dark {
-  background-color: var(--dark-background);
   transition: background-color 0.6s ease, color 0.3s ease;
+}
+
+/* Dark mode styling for body */
+html.dark body {
+  background-color: var(--dark-background);
   color: var(--dark-foreground);
 }
-

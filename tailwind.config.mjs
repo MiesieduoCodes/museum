@@ -14,6 +14,7 @@ export default {
         darkBackground: "var(--dark-background)", // Dark mode background
         darkForeground: "var(--dark-foreground)", // Dark mode text
       },
+      // Optionally, add custom font families, spacing, etc.
     },
   },
   plugins: [],

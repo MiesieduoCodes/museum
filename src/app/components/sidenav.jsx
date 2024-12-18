@@ -25,7 +25,7 @@ export default function SideNav() {
         { title: "Niger Delta Art", link: "/categories/sculptures", icon: <GiMuscularTorso /> },
         { title: "Digital Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
         { title: "Contemporary Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
-        { title: "West African Art", link: "/categories/photography", icon: <MdMonochromePhotos /> },
+        { title: "West African", link: "/categories/photography", icon: <MdMonochromePhotos /> },
       ],
     },
     { title: "About Us", link: "/about", icon: <FiInfo /> },

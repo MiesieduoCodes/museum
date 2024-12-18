@@ -1,11 +1,11 @@
 import HeroSection from "./components/herosection";
-import SideNav from "./components/sidenav";
+
 import { FaInstagram, FaFacebook, FaTwitter } from "react-icons/fa";
 
 export default function Home() {
   return (
     <main className="bg-gray-100 min-h-screen">
-      <SideNav/>
+  
       {/* Hero Section */}
       <HeroSection />
 
